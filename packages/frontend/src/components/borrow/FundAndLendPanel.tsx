@@ -101,7 +101,7 @@ function FundAndLendPanel() {
   }
 
   return (
-    <Tabs defaultValue='fund' className='w-[400px]'>
+    <Tabs defaultValue='fund' className='w-[400px] fundLend'>
       <TabsList>
         <TabsTrigger value='fund'>Fund</TabsTrigger>
         <TabsTrigger value='lend'>Lend</TabsTrigger>
@@ -163,7 +163,7 @@ function FundAndLendPanel() {
                           defaultValue={field.value}
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder='Escoge una cantidad de meses' />
+                            <SelectValue placeholder='Chose a mounth amount' />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectGroup>
@@ -187,7 +187,7 @@ function FundAndLendPanel() {
                     </FormItem>
                   )}
                 />
-                <Button type='submit'>Pedir prestamo</Button>
+                <Button type='submit'>Ask for a lend</Button>
               </form>
             </Form>
           </CardContent>

@@ -34,7 +34,7 @@ function TotalFunds() {
         <Card>
           <CardHeader className='chart flex flex-row items-center justify-between space-y-0 pb-2'>
             <CardTitle className='text-sm font-medium'>
-              Ganancias totales
+              Total revenue
             </CardTitle>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -52,7 +52,7 @@ function TotalFunds() {
           <CardContent className='flex flex-col gap-2'>
             <Skeleton className='h-[15px] w-1/2'></Skeleton>
 
-            <p className='text-xs text-muted-foreground'>+20.1% en total</p>
+            <p className='text-xs text-muted-foreground'>+20.1% revenue</p>
           </CardContent>
           <CardFooter>
             <Button>Withdraw</Button>
@@ -88,7 +88,7 @@ function TotalFunds() {
             </p>
           </CardContent>
           <CardFooter>
-            <Button onClick={handleOnWithdraw}>Retirar fondos</Button>
+            <Button onClick={handleOnWithdraw}>Withdraw</Button>
           </CardFooter>
         </Card>
       )}
