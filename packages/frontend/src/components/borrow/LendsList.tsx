@@ -17,8 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useRecentLends } from '@/hooks/Lend/useRecentLends';
-import { formatEther, parseEther } from 'viem';
+import { Address, formatEther, parseEther } from 'viem';
 import {
   Dialog,
   DialogContent,
@@ -39,22 +38,24 @@ import {
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useNetwork } from 'wagmi';
+import { useRecentLends } from '@/hooks/useRecentLends';
+import { usePayDebt } from '@/hooks/usePayDebt';
+import { useTokenSpendance } from '@/hooks/useTokenSpendance';
+import { useApproveAllowance } from '@/hooks/useApproveAllowance';
+import { formatFiat } from '@/functions/formatFiat';
+import { borrowManagerAddress } from '@/constants';
 
 function LendsList() {
   const [id, setId] = useState<string | null>(null);
   const [currentDebt, setCurrentDebt] = useState('');
-  const { data: recentLends } = useRecentLends();
   const payDebtForm = useForm();
   const approveForm = useForm();
-  const { formatFiat } = useNumbers();
+  const { data: recentLends } = useRecentLends();
   const { writeAsync: payDebt } = usePayDebt();
-
-  const { writeAsync: approve } = useApproveErc20();
-  const { data: spendance } = useErc20Spendance();
-  const { lendAddress } = useNetworkContract();
+  const { data: spendance } = useTokenSpendance();
+  const { writeAsync: approve } = useApproveAllowance();
 
   const { chain } = useNetwork();
-  const currentCurrency = currencies[chain?.id as keyof typeof currencies];
 
   function getTotaDebt() {
     if (!recentLends) return 0;
@@ -90,7 +91,7 @@ function LendsList() {
   async function onApproveSubmit(values: any) {
     try {
       await approve({
-        args: [lendAddress, parseEther(currentDebt)],
+        args: [borrowManagerAddress as Address, parseEther(currentDebt)],
       });
       approveForm.reset({
         amount: '',
@@ -138,43 +139,43 @@ function LendsList() {
   return (
     <Card className='min-h-full recent'>
       <CardHeader>
-        <CardTitle>Tus prestamos</CardTitle>
+        <CardTitle>Your lends</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead className='text-center'>ID</TableHead>
-              <TableHead className='text-center'>Valor inicial</TableHead>
-              <TableHead className='text-center'>Intereses</TableHead>
-              <TableHead className='text-center'>Deuda actual</TableHead>
-              <TableHead className='text-center'>Valor pagado</TableHead>
-              <TableHead className='text-center'>Plazo</TableHead>
-              <TableHead className='text-center'>Plazo restante</TableHead>
+              <TableHead className='text-center'>Initial value</TableHead>
+              <TableHead className='text-center'>Interest</TableHead>
+              <TableHead className='text-center'>Current debt</TableHead>
+              <TableHead className='text-center'>Value paied</TableHead>
+              <TableHead className='text-center'>Loan term</TableHead>
+              <TableHead className='text-center'>Loan term remaining</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {!recentLends ? (
-              <TableRow>No hay prestamos</TableRow>
+              <TableRow>There is no lends</TableRow>
             ) : (
               //@ts-expect-error
               recentLends.map((loan, index) => (
                 <TableRow key={index}>
                   <TableCell className='text-center'>{index}</TableCell>
                   <TableCell className='text-center'>
-                    {currentCurrency}
+                    tBTC
                     {formatFiat(formatEther(loan.initialAmount))}
                   </TableCell>
                   <TableCell className='text-center'>
-                    {currentCurrency}
+                    tBTC
                     {formatFiat(formatEther(loan.interest))}
                   </TableCell>
                   <TableCell className='text-center'>
-                    {currentCurrency}
+                    tBTC
                     {formatFiat(formatEther(loan.amount))}
                   </TableCell>
                   <TableCell className='text-center'>
-                    {currentCurrency}
+                    tBTC
                     {formatFiat(
                       parseFloat(formatEther(loan.initialAmount)) -
                         parseFloat(formatEther(loan.amount))
@@ -182,11 +183,11 @@ function LendsList() {
                   </TableCell>
                   <TableCell className='text-center'>
                     {getTotalDays(loan.startDate, Number(loan.blockMonths))}{' '}
-                    Dias
+                    days
                   </TableCell>
                   <TableCell className='text-center'>
                     {getTotalTime(loan.startDate, Number(loan.blockMonths))}{' '}
-                    Dias
+                    days
                   </TableCell>
                   <TableCell>
                     <Dialog>
@@ -197,14 +198,14 @@ function LendsList() {
                           }
                           type='button'
                         >
-                          Pagar cuota
+                          Pay debt
                         </Button>
                       </DialogTrigger>
                       <DialogContent className='sm:max-w-[425px]'>
                         <DialogHeader>
-                          <DialogTitle>Pagar cuota</DialogTitle>
+                          <DialogTitle>Pay debt</DialogTitle>
                           <DialogDescription>
-                            Ponte al día con tus pagos.
+                            You can pay your debt here
                           </DialogDescription>
                           <Form {...payDebtForm}>
                             <form
@@ -219,7 +220,7 @@ function LendsList() {
                                 rules={{
                                   min: {
                                     value: 0,
-                                    message: 'El monto debe ser mayor a: 0',
+                                    message: 'The value must be greater than: 0',
                                   },
                                 }}
                                 render={({ field }) => (
@@ -247,7 +248,7 @@ function LendsList() {
                                   onClick={() => setId(index)}
                                   type='submit'
                                 >
-                                  Pagar cuota
+                                  Pay debt
                                 </Button>
                               ) : (
                                 <Dialog>
@@ -255,16 +256,16 @@ function LendsList() {
                                     className='cursor-pointer'
                                     asChild
                                   >
-                                    <Button type='button'>Pagar cuota</Button>
+                                    <Button type='button'>Pay debt</Button>
                                   </DialogTrigger>
                                   <DialogContent className='sm:max-w-[425px]'>
                                     <DialogHeader>
                                       <DialogTitle>
-                                        Pre-aprueba la transacción
+                                        Approve allowance
                                       </DialogTitle>
                                       <DialogDescription>
-                                        Para poder realizar la transacción debes
-                                        tener pre-aprobado un monto.
+                                        You need to approve the allowance to pay
+                                        the debt
                                       </DialogDescription>
                                     </DialogHeader>
                                     <Form {...approveForm}>
@@ -281,7 +282,7 @@ function LendsList() {
                                             min: {
                                               value: 0,
                                               message:
-                                                'El monto debe ser mayor a: 0',
+                                                'The value must be greater than: 0',
                                             },
                                           }}
                                           render={({ field }) => (
@@ -304,7 +305,7 @@ function LendsList() {
                                             </FormItem>
                                           )}
                                         />
-                                        <Button type='submit'>Aprobar</Button>
+                                        <Button type='submit'>Approve</Button>
                                       </form>
                                     </Form>
                                   </DialogContent>
@@ -322,9 +323,9 @@ function LendsList() {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={7}>Deuda total</TableCell>
+              <TableCell colSpan={7}>Total debt</TableCell>
               <TableCell className='text-right'>
-                {currentCurrency}
+                tBTC
                 {formatFiat(getTotaDebt())}
               </TableCell>
             </TableRow>
