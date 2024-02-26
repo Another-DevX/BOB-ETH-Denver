@@ -1,7 +1,3 @@
-Lazy readme....
-
-
-
 # SpongeBOB 🧽
 With SpomgeBOB🧽 s.......
 
