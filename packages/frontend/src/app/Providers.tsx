@@ -15,8 +15,8 @@ const metadata = {
 };
 
 export const BOB = {
-  id: 11,
-  name: 'Build on bitcoin',
+  id: 111,
+  name: 'BOB Testnet',
   network: 'BOB',
   nativeCurrency: {
     decimals: 18,
