@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   CardHeader,
   Card,
@@ -92,7 +92,7 @@ function Page() {
   }
 
   return (
-    <div className='lg:col-span-2 flex w-full flex-col lg:flex-row justify-stretch items-stretch gap-10 '>
+    <div className=' flex w-full flex-col lg:flex-row justify-stretch items-stretch gap-10 p-10'>
       <Card className='w-full recent '>
         <CardHeader>
           <CardTitle>Modify whitelist</CardTitle>
@@ -334,7 +334,7 @@ function Page() {
                               />
                             </FormControl>
                             <FormDescription>
-                                Remember the value is in tBTC$
+                              Remember the value is in tBTC$
                             </FormDescription>
                             <FormMessage />
                           </FormItem>
