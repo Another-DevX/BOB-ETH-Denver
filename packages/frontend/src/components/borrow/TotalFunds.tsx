@@ -29,13 +29,11 @@ function TotalFunds() {
   };
 
   return (
-    <div className='w-full h-full total'>
+    <div suppressHydrationWarning className='w-full h-full total'>
       {isLoading ? (
         <Card>
           <CardHeader className='chart flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>
-              Total revenue
-            </CardTitle>
+            <CardTitle className='text-sm font-medium'>Funds</CardTitle>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 24 24'
@@ -49,19 +47,26 @@ function TotalFunds() {
               <path d='M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6' />
             </svg>
           </CardHeader>
-          <CardContent className='flex flex-col gap-2'>
-            <Skeleton className='h-[15px] w-1/2'></Skeleton>
-
-            <p className='text-xs text-muted-foreground'>+20.1% revenue</p>
+          <CardContent>
+            <div>
+              <Skeleton className='w-full h-4' />
+            </div>
+            <p className='w-full text-start'>
+              Total contract funds:{' '}
+              <strong>
+                tBTC
+                {data ? formatFiat(formatEther(data as bigint)) : formatFiat(0)}
+              </strong>
+            </p>
           </CardContent>
           <CardFooter>
-            <Button>Withdraw</Button>
+            <Button onClick={handleOnWithdraw}>Withdraw</Button>
           </CardFooter>
         </Card>
       ) : (
         <Card>
           <CardHeader className='chart flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Funds </CardTitle>
+            <CardTitle className='text-sm font-medium'>Funds</CardTitle>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 24 24'
@@ -82,7 +87,7 @@ function TotalFunds() {
             <p className='w-full text-start'>
               Total contract funds:{' '}
               <strong>
-                BTC
+                tBTC
                 {data ? formatFiat(formatEther(data as bigint)) : formatFiat(0)}
               </strong>
             </p>

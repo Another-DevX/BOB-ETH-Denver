@@ -10,8 +10,9 @@ function AnimatedPrice({ price }: { price: number }) {
     return controls.stop;
   }, [price]);
   return (
-    <div className='text-2xl flex flex-row gap-1 font-bold'>
-      tBTC$ <motion.div>{rounded}</motion.div>
+    <div suppressHydrationWarning className='text-2xl flex flex-row gap-1 font-bold'>
+      <p>tBTC$</p>
+      <motion.div>{rounded}</motion.div>
     </div>
   );
 }

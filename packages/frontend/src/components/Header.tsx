@@ -3,7 +3,7 @@ import React from 'react';
 
 function Header() {
   return (
-    <nav className='flex w-full justify-between'>
+    <nav className='flex w-full h-20 justify-between'>
       <h1>Sponge</h1>
       <div className='flex flex-row gap-2'>
         <Link href='/borrow'>Lend panel</Link>
