@@ -17,11 +17,11 @@ const metadata = {
 export const BOB = {
   id: 11,
   name: 'Build on bitcoin',
-  network: 'bob',
+  network: 'BOB',
   nativeCurrency: {
     decimals: 18,
-    name: 'BOB ETH',
-    symbol: 'ETL',
+    name: 'ETH',
+    symbol: 'ETH',
   },
   rpcUrls: {
     public: { http: ['https://testnet.rpc.gobob.xyz'] },
