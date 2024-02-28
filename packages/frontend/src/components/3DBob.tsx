@@ -1,3 +1,4 @@
+//@ts-ignore
 'use client';
 import React, { Suspense, useEffect, useRef } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
