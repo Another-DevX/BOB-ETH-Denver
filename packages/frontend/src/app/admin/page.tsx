@@ -168,6 +168,82 @@ function Page() {
                           </FormItem>
                         )}
                       />
+                      <FormField
+                        control={addToWhiteListForm.control}
+                        name='Address'
+                        rules={{
+                          required: 'This field is required',
+                          validate: {
+                            isValidEthereumAddress: (value) =>
+                              isValidEthereumAddress(value) ||
+                              'Must be a valid Ethereum address',
+                          },
+                        }}
+                        render={({ field }) => (
+                          <FormItem className='text-start  w-full'>
+                            <FormLabel>Validator 1</FormLabel>
+                            <FormControl>
+                              <Input
+                                type='text'
+                                placeholder='0xd7sjh27shs68...'
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                       <FormField
+                        control={addToWhiteListForm.control}
+                        name='Address'
+                        rules={{
+                          required: 'This field is required',
+                          validate: {
+                            isValidEthereumAddress: (value) =>
+                              isValidEthereumAddress(value) ||
+                              'Must be a valid Ethereum address',
+                          },
+                        }}
+                        render={({ field }) => (
+                          <FormItem className='text-start  w-full'>
+                            <FormLabel>Validator 2</FormLabel>
+                            <FormControl>
+                              <Input
+                                type='text'
+                                placeholder='0xd7sjh27shs68...'
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                       <FormField
+                        control={addToWhiteListForm.control}
+                        name='Address'
+                        rules={{
+                          required: 'This field is required',
+                          validate: {
+                            isValidEthereumAddress: (value) =>
+                              isValidEthereumAddress(value) ||
+                              'Must be a valid Ethereum address',
+                          },
+                        }}
+                        render={({ field }) => (
+                          <FormItem className='text-start  w-full'>
+                            <FormLabel>Validator 3</FormLabel>
+                            <FormControl>
+                              <Input
+                                type='text'
+                                placeholder='0xd7sjh27shs68...'
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
                       <Button type='submit'>Add to whitelist</Button>
                     </form>
                   </Form>

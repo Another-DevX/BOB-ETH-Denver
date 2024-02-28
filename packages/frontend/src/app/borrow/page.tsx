@@ -1,5 +1,6 @@
 'use client';
 
+import { ApprovalRequests } from '@/components/borrow/ApprovalRequests';
 import { FundAndLendPanel } from '@/components/borrow/FundAndLendPanel';
 import LendsList from '@/components/borrow/LendsList';
 import { TotalFunds } from '@/components/borrow/TotalFunds';
@@ -14,11 +15,11 @@ function Page() {
   if (!isMounted) return null;
   return (
     <main>
-      <h1>Borrow panel</h1>
       <div className='borrow'>
         <TotalFunds />
         <LendsList />
         <FundAndLendPanel />
+        <ApprovalRequests />
       </div>
     </main>
   );
