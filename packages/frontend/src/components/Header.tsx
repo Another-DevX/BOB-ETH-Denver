@@ -15,7 +15,9 @@ function Header() {
           </span>
         </Link>
         <div className='flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse'>
-          <w3m-button />
+          <div className='z-50'>
+            <w3m-button />
+          </div>
 
           <button
             data-collapse-toggle='navbar-sticky'

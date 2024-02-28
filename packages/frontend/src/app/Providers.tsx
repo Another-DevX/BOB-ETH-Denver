@@ -38,6 +38,10 @@ createWeb3Modal({
   projectId,
   chains,
   enableAnalytics: true, // Optional - defaults to your Cloud configuration
+  themeVariables: {
+    '--w3m-color-mix': '#e66000',
+    "--w3m-accent": "#e66000",
+  },
 });
 
 export function Web3Modal({ children }: { children: React.ReactNode }) {
