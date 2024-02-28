@@ -56,8 +56,8 @@
     grid-template-columns: 0.8fr 1.2fr;
     grid-template-rows: 0.1fr auto;
     grid-template-areas:
-      'total recent'
-      'fundLend approvals';
+      'total some'
+      'fundLend some';
     gap: 20px;
     padding: 50px;
     justify-items: stretch;

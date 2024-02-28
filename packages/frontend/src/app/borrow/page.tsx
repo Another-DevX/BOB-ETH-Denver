@@ -17,9 +17,11 @@ function Page() {
     <main>
       <div className='borrow'>
         <TotalFunds />
-        <LendsList />
         <FundAndLendPanel />
-        <ApprovalRequests />
+        <div className='flex flex-col gap-2 row-span-2 h-full flex-1 items-stretch'>
+          <LendsList />
+          <ApprovalRequests />
+        </div>
       </div>
     </main>
   );
