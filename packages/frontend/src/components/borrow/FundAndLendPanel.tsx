@@ -101,7 +101,7 @@ function FundAndLendPanel() {
   }
 
   return (
-    <Tabs defaultValue='fund' className='w-[400px] fundLend'>
+    <Tabs defaultValue='fund' className='w-full fundLend'>
       <TabsList>
         <TabsTrigger value='fund'>Fund</TabsTrigger>
         <TabsTrigger value='lend'>Lend</TabsTrigger>
